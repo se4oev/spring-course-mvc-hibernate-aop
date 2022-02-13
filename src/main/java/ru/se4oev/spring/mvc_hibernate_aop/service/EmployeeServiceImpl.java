@@ -1,0 +1,29 @@
+package ru.se4oev.spring.mvc_hibernate_aop.service;
+
+import org.springframework.stereotype.Service;
+import ru.se4oev.spring.mvc_hibernate_aop.dao.EmployeeDAO;
+import ru.se4oev.spring.mvc_hibernate_aop.entity.Employee;
+
+import javax.transaction.Transactional;
+import java.util.List;
+
+/**
+ * Created by se4oev on 13.02.2022
+ * Description:
+ */
+@Service
+public class EmployeeServiceImpl implements EmployeeService {
+
+    private final EmployeeDAO employeeDAO;
+
+    public EmployeeServiceImpl(EmployeeDAO employeeDAO) {
+        this.employeeDAO = employeeDAO;
+    }
+
+    @Override
+    @Transactional
+    public List<Employee> getAllEmployees() {
+        return employeeDAO.getAllEmployees();
+    }
+
+}
