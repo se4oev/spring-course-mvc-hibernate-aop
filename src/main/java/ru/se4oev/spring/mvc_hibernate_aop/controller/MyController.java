@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.se4oev.spring.mvc_hibernate_aop.entity.Employee;
 import ru.se4oev.spring.mvc_hibernate_aop.service.EmployeeService;
 
@@ -40,10 +41,18 @@ public class MyController {
         return "employee-info";
     }
 
-    @RequestMapping("saveEmployee")
+    @RequestMapping("/saveEmployee")
     public String saveEmployee(@ModelAttribute(name = "employee") Employee employee) {
         employeeService.saveEmployee(employee);
         return "redirect:/";
+    }
+
+    @RequestMapping("/updateInfo")
+    public String updateEmployee(@RequestParam(name = "empId") int id,
+                                 Model model) {
+        Employee employee = employeeService.getEmployee(id);
+        model.addAttribute("employee", employee);
+        return "employee-info";
     }
 
 }
