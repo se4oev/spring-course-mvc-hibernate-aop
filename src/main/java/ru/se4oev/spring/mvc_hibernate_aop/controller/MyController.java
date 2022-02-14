@@ -2,6 +2,7 @@ package ru.se4oev.spring.mvc_hibernate_aop.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.se4oev.spring.mvc_hibernate_aop.entity.Employee;
 import ru.se4oev.spring.mvc_hibernate_aop.service.EmployeeService;
@@ -28,6 +29,21 @@ public class MyController {
         model.addAttribute("allEmps", allEmployees);
 
         return "all-employees";
+    }
+
+    @RequestMapping("/addNewEmployee")
+    public String addNewEmployee(Model model) {
+
+        Employee employee = new Employee();
+        model.addAttribute("employee", employee);
+
+        return "employee-info";
+    }
+
+    @RequestMapping("saveEmployee")
+    public String saveEmployee(@ModelAttribute(name = "employee") Employee employee) {
+        employeeService.saveEmployee(employee);
+        return "redirect:/";
     }
 
 }

@@ -6,7 +6,6 @@ import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import ru.se4oev.spring.mvc_hibernate_aop.entity.Employee;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -29,5 +28,12 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         Query<Employee> query = session.createQuery("FROM Employee ", Employee.class);
 
         return query.getResultList();
+    }
+
+    @Override
+    public void saveEmployee(Employee employee) {
+        Session session = sessionFactory.getCurrentSession();
+
+        session.save(employee);
     }
 }
