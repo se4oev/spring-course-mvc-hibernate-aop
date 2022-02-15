@@ -52,8 +52,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         Session session = sessionFactory.getCurrentSession();
 
         Query<?> query = session.createQuery(
-                "DELETE FROM Employee " +
-                   " WHERE id = :employeeId"
+                "DELETE FROM Employee e " +
+                   " WHERE e.id = :employeeId"
         );
 
         query.setParameter("employeeId", id);
